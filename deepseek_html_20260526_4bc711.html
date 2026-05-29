@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ООО «Донинжиниринг» | Строительные материалы и услуги</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FA;
+            color: #1E2A32;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Colors */
+        :root {
+            --concrete: #EFF2F5;
+            --steel: #2C3E50;
+            --accent: #E67E22;   /* оранжевый индустриальный акцент */
+            --accent-dark: #C0392B;
+            --dark-bg: #2C3E50;
+            --card-white: #FFFFFF;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* General */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+            position: relative;
+            display: inline-block;
+        }
+        h2:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin-top: 8px;
+            border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            background: #D35400;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(230,126,34,0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 1px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+            padding: 16px 0;
+            transition: 0.2s;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--steel);
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #5f6c7a;
+            display: block;
+            margin-top: 2px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2C3E50;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        .contact-header {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .contact-header a {
+            text-decoration: none;
+            color: var(--steel);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .contact-header i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        .menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--steel);
+        }
+        /* mobile nav */
+        @media (max-width: 980px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                background: white;
+                padding: 24px;
+                margin-top: 20px;
+                border-radius: 24px;
+                box-shadow: var(--shadow);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .contact-header {
+                display: none;
+            }
+            .menu-icon {
+                display: block;
+            }
+            .header-flex {
+                position: relative;
+            }
+            .logo {
+                flex:1;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(107deg, rgba(35,45,55,0.85) 0%, rgba(20,30,40,0.75) 100%), url('https://images.unsplash.com/photo-1581092335871-4d4b1a5f6f1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-top: 0;
+            padding-top: 100px;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .hero-content p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin: 20px 0 30px;
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            section { padding: 60px 0; }
+        }
+
+        /* about */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .about-founder {
+            background: var(--card-white);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .founder-img {
+            width: 140px;
+            height: 140px;
+            background: #ccd7e4;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            background-image: url('https://randomuser.me/api/portraits/men/32.jpg');
+            background-size: cover;
+            background-position: top;
+            border: 3px solid var(--accent);
+        }
+        .activities {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .activity-card {
+            background: var(--card-white);
+            padding: 20px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: 0.2s;
+        }
+        .activity-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* slider */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .slider-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            gap: 24px;
+        }
+        .slider-card {
+            flex: 0 0 calc(33.333% - 16px);
+            background: white;
+            border-radius: 28px;
+            padding: 28px 20px;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+        .slider-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 16px 0 12px;
+        }
+        .slider-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 32px;
+        }
+        .slider-btn {
+            background: var(--steel);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.5rem;
+        }
+        .slider-btn:hover {
+            background: var(--accent);
+        }
+        @media (max-width: 1000px) {
+            .slider-card { flex: 0 0 calc(50% - 12px); }
+        }
+        @media (max-width: 680px) {
+            .slider-card { flex: 0 0 100%; }
+        }
+
+        /* projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.25s;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        .project-img {
+            background: #B0BEC5;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+        .project-info {
+            padding: 20px;
+        }
+        .project-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .project-info p {
+            color: #4a5b6e;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1E2A32;
+            color: #cfdfed;
+            padding: 48px 0 24px;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        .footer-req p {
+            margin: 6px 0;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.6rem;
+            margin-right: 20px;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            font-size: 0.85rem;
+        }
+        button, .order-btn {
+            background: var(--accent);
+            border: none;
+            padding: 10px 22px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #D35400;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-flex">
+        <div class="logo">
+            <h1>Донинжиниринг</h1>
+            <span>Строительные материалы и услуги</span>
+        </div>
+        <div class="menu-icon" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Главная</a>
+            <a href="#services">Услуги</a>
+            <a href="#goods">Товары</a>
+            <a href="#projects">Проекты</a>
+            <a href="#footer">Контакты</a>
+            <div class="contact-header" style="display:flex; gap:12px; margin-top: 10px;">
+                <a href="tel:+74951234567"><i class="fas fa-phone-alt"></i>+7 (495) 123-45-67</a>
+                <a href="mailto:info@donengineering.ru"><i class="fas fa-envelope"></i>info@donengineering.ru</a>
+            </div>
+        </div>
+        <div class="contact-header">
+            <a href="tel:+74951234567"><i class="fas fa-phone-alt"></i>+7 (495) 123-45-67</a>
+            <a href="mailto:info@donengineering.ru"><i class="fas fa-envelope"></i>info@donengineering.ru</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero секция -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>ООО «Донинжиниринг»</h1>
+            <p>Надёжные решения для вашего строительства</p>
+            <button class="btn" id="estimateBtn">Рассчитать смету</button>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section id="about">
+        <div class="container">
+            <h2>О компании</h2>
+            <div class="about-grid">
+                <div>
+                    <p style="font-size:1.1rem; margin-bottom: 24px;">Компания основана в 2012 году. Мы поставляем качественные материалы и выполняем строительные услуги под ключ. Индивидуальный подход, гарантия на все виды работ, собственный автопарк.</p>
+                    <div class="activities">
+                        <div class="activity-card"><i class="fas fa-drafting-compass"></i> Инжиниринговые услуги</div>
+                        <div class="activity-card"><i class="fas fa-truck"></i> Продажа бетона и ЖБИ</div>
+                        <div class="activity-card"><i class="fas fa-clipboard-list"></i> Строительный контроль</div>
+                        <div class="activity-card"><i class="fas fa-mountain"></i> Поставка нерудных материалов</div>
+                    </div>
+                </div>
+                <div class="about-founder">
+                    <div class="founder-img"></div>
+                    <h3>Артём Сергеевич Ковалёв</h3>
+                    <p style="margin-top:8px;">Основатель и генеральный директор<br>Более 15 лет в строительной отрасли</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайдер (объединим услуги и товары) -->
+    <section id="services-goods">
+        <div class="container">
+            <h2>Услуги и товары</h2>
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Слайд 1 -->
+                    <div class="slider-card">
+                        <h3>Архитектурное проектирование</h3>
+                        <div class="price">от 50 000 ₽</div>
+                        <p>Индивидуальный проект дома или офиса с 3D-визуализацией и полной документацией.</p>
+                        <button class="order-btn" data-name="Архитектурное проектирование">Заказать</button>
+                    </div>
+                    <!-- Слайд 2 -->
+                    <div class="slider-card">
+                        <h3>Бетон М300</h3>
+                        <div class="price">5 200 ₽/м³</div>
+                        <p>Доставка миксером по городу, высокое качество, паспорт качества.</p>
+                        <button class="order-btn" data-name="Бетон М300">Заказать</button>
+                    </div>
+                    <!-- Слайд 3 -->
+                    <div class="slider-card">
+                        <h3>Монтаж кровли</h3>
+                        <div class="price">от 1 200 ₽/м²</div>
+                        <p>Под ключ с гарантией 5 лет. Любые кровельные системы.</p>
+                        <button class="order-btn" data-name="Монтаж кровли">Заказать</button>
+                    </div>
+                    <!-- Слайд 4 -->
+                    <div class="slider-card">
+                        <h3>Кирпич облицовочный</h3>
+                        <div class="price">18 ₽/шт</div>
+                        <p>10 цветов на выбор, керамический, гиперпрессованный, фасовка поддонами.</p>
+                        <button class="order-btn" data-name="Кирпич облицовочный">Заказать</button>
+                    </div>
+                </div>
+                <div class="slider-buttons">
+                    <button class="slider-btn" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проекты -->
+    <section id="projects">
+        <div class="container">
+            <h2>Выполненные проекты</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-building" style="font-size: 3rem;"></i></div>
+                    <div class="project-info">
+                        <h3>Жилой комплекс «Прибрежный»</h3>
+                        <p>Отделка фасада и поставка кирпича. Более 15 000 м² облицовки.</p>
+                        <button class="project-detail" data-project="ЖК Прибрежный">Подробнее</button>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-warehouse" style="font-size: 3rem;"></i></div>
+                    <div class="project-info">
+                        <h3>Складской терминал «Логистик-Юг»</h3>
+                        <p>Бетонирование полов и кровельные работы. Общая площадь 8000 м².</p>
+                        <button class="project-detail" data-project="Складской терминал Логистик-Юг">Подробнее</button>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img"><i class="fas fa-tree" style="font-size: 3rem;"></i></div>
+                    <div class="project-info">
+                        <h3>Коттеджный посёлок «Лесной»</h3>
+                        <p>Комплексное инженерное обеспечение, дороги, сети, поставка материалов.</p>
+                        <button class="project-detail" data-project="Коттеджный посёлок Лесной">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer id="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-req">
+                <h4 style="color:white;">ООО «Донинжиниринг»</h4>
+                <p>ИНН 7701234567 / КПП 770101001</p>
+                <p>ОГРН 1127700012345</p>
+                <p>г. Москва, ул. Строителей, 15</p>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <p style="margin-top: 20px;"><i class="fas fa-phone-alt"></i> +7 (495) 123-45-67</p>
+                <p><i class="fas fa-envelope"></i> info@donengineering.ru</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Донинжиниринг. Все права защищены.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Мобильное меню
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Плавная прокрутка для якорей
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            if (targetId === 'home' || targetId === '') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+        });
+    });
+
+    // Кнопка рассчитать смету (Alert)
+    const estimateBtn = document.getElementById('estimateBtn');
+    if(estimateBtn){
+        estimateBtn.addEventListener('click', () => {
+            alert("Спасибо за интерес! Специалист свяжется с вами для расчёта сметы.");
+        });
+    }
+
+    // ---------- СЛАЙДЕР ----------
+    const track = document.getElementById('sliderTrack');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    let currentIndex = 0;
+    let slides = Array.from(document.querySelectorAll('.slider-card'));
+    let visibleSlides = 3;
+    let slideWidth = 0;
+
+    function updateVisibleSlides() {
+        const width = window.innerWidth;
+        if (width <= 680) visibleSlides = 1;
+        else if (width <= 1000) visibleSlides = 2;
+        else visibleSlides = 3;
+    }
+
+    function getSlideGap() {
+        const style = window.getComputedStyle(track);
+        const gap = parseFloat(style.gap) || 24;
+        return gap;
+    }
+
+    function getSlideCardWidth() {
+        const container = document.querySelector('.slider-container');
+        if (!container) return 300;
+        const containerWidth = container.clientWidth;
+        const gap = getSlideGap();
+        const totalGap = gap * (visibleSlides - 1);
+        const cardWidth = (containerWidth - totalGap) / visibleSlides;
+        return cardWidth;
+    }
+
+    function setSliderDimensions() {
+        updateVisibleSlides();
+        const cardWidth = getSlideCardWidth();
+        slides.forEach(card => {
+            card.style.flex = `0 0 ${cardWidth}px`;
+        });
+        // обновляем позицию
+        const maxIndex = Math.max(0, slides.length - visibleSlides);
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+        updateSliderPosition();
+    }
+
+    function updateSliderPosition() {
+        if (!track) return;
+        const cardWidth = getSlideCardWidth();
+        const gap = getSlideGap();
+        const offset = currentIndex * (cardWidth + gap);
+        track.style.transform = `translateX(-${offset}px)`;
+    }
+
+    function slideNext() {
+        const maxIndex = Math.max(0, slides.length - visibleSlides);
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateSliderPosition();
+        } else if (currentIndex === maxIndex && slides.length > visibleSlides) {
+            // зациклим опционально: остаемся на месте, но можно вернуть в начало по желанию
+            // но лучше просто не листать
+        }
+    }
+    function slidePrev() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSliderPosition();
+        }
+    }
+
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', slidePrev);
+        nextBtn.addEventListener('click', slideNext);
+    }
+
+    window.addEventListener('resize', () => {
+        setSliderDimensions();
+    });
+    setSliderDimensions();
+
+    // ---------- BUTTONS ALERTS ----------
+    // Заказ в слайдере
+    const orderBtns = document.querySelectorAll('.order-btn');
+    orderBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const itemName = btn.getAttribute('data-name') || 'товар/услугу';
+            alert(`Вы выбрали: ${itemName}. Менеджер свяжется с вами для уточнения деталей.`);
+        });
+    });
+
+    // проекты подробнее
+    const projectDetails = document.querySelectorAll('.project-detail');
+    projectDetails.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const project = btn.getAttribute('data-project');
+            alert(`Проект "${project}": реализован под ключ, фотогалерея доступна по запросу. Свяжитесь с нами для портфолио.`);
+        });
+    });
+
+    // Для header мобильный клик по ссылкам закрытия
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+    // корректировка слайдера после загрузки изображений
+    window.addEventListener('load', () => {
+        setSliderDimensions();
+    });
+    setTimeout(() => {
+        setSliderDimensions();
+    }, 200);
+</script>
+</body>
+</html>
